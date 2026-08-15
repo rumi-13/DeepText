@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./App.css";
 
-const API_BASE_URL = (import.meta.env.VITE_API_URL || "http://127.0.0.1:8000").replace(/\/+$/, "");
+const API_BASE_URL = (
+  import.meta.env.VITE_API_URL || "http://127.0.0.1:8000"
+).replace(/\/+$/, "");
 
 function App() {
   const [message, setMessage] = useState("");
@@ -9,8 +11,15 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
+  const messagesEndRef = useRef(null);
+
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({
+      behavior: "smooth",
+    });
+  }, [messages, loading]);
+
   async function handleSend() {
-    console.log("API URL:", API_BASE_URL);
     const text = message.trim();
 
     if (!text || loading) return;
@@ -69,20 +78,18 @@ function App() {
   return (
     <div className="app">
 
-      {/* Header */}
+      {/* HEADER */}
       <header className="header">
-        <div className="header-content">
+        <div className="header-inner">
 
           <div className="brand">
-            <div className="brand-logo">
-              DT
-            </div>
+            <div className="brand-logo">DT</div>
 
             <div>
               <h1>DeepText</h1>
 
               <div className="status">
-                <span className="status-dot"></span>
+                <span className="status-dot" />
                 Online
               </div>
             </div>
@@ -95,25 +102,18 @@ function App() {
         </div>
       </header>
 
-      {/* Main */}
+      {/* CHAT */}
       <main className="main">
 
-        {/* Chat */}
         <section className="chat">
 
           {messages.length === 0 ? (
             <div className="welcome">
-
-              <div className="welcome-mark">
-                DT
-              </div>
+              <div className="welcome-mark">DT</div>
 
               <h2>Hello.</h2>
 
-              <p>
-                Ready to ask something?
-              </p>
-
+              <p>Ready to ask something?</p>
             </div>
           ) : (
             <div className="messages">
@@ -123,16 +123,14 @@ function App() {
                   key={index}
                   className={`message-row ${item.role}`}
                 >
-                  <div className={`message-bubble ${item.role}`}>
-
+                  <div
+                    className={`message-bubble ${item.role}`}
+                  >
                     <span className="message-role">
                       {item.role === "user" ? "You" : "AI"}
                     </span>
 
-                    <p>
-                      {item.content}
-                    </p>
-
+                    <p>{item.content}</p>
                   </div>
                 </div>
               ))}
@@ -140,28 +138,28 @@ function App() {
               {loading && (
                 <div className="message-row ai">
                   <div className="typing">
-
-                    <span></span>
-                    <span></span>
-                    <span></span>
-
+                    <span />
+                    <span />
+                    <span />
                   </div>
                 </div>
               )}
+
+              <div ref={messagesEndRef} />
 
             </div>
           )}
 
         </section>
 
-        {/* Error */}
+        {/* ERROR */}
         {error && (
           <div className="error">
             {error}
           </div>
         )}
 
-        {/* Composer */}
+        {/* INPUT */}
         <div className="composer">
 
           <input
