@@ -31,7 +31,6 @@ build/
 .npm/
 .cache/
 *.tsbuildinfo
-backend/chatbot.py
 
 # IDE/editor
 .vscode/
