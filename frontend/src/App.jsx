@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./App.css";
 
-const API_URL = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000/chat";
+const API_BASE_URL = (import.meta.env.VITE_API_URL || "http://127.0.0.1:8000").replace(/\/+$/, "");
 
 function App() {
   const [message, setMessage] = useState("");
@@ -10,6 +10,7 @@ function App() {
   const [error, setError] = useState("");
 
   async function handleSend() {
+    console.log("API URL:", API_BASE_URL);
     const text = message.trim();
 
     if (!text || loading) return;
@@ -27,7 +28,7 @@ function App() {
     setLoading(true);
 
     try {
-      const response = await fetch(API_URL, {
+      const response = await fetch(`${API_BASE_URL}/chat`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
