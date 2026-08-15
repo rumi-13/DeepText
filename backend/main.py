@@ -30,11 +30,6 @@ class ChatRequest(BaseModel):
     message: str
 
 
-@app.get("/health")
-def health_check():
-    return {"status": "ok"}
-
-
 @app.post("/chat")
 async def chat_endpoint(request: ChatRequest):
     try:
