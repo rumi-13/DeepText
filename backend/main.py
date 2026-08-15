@@ -10,10 +10,7 @@ allowed_origins = [
     origin.strip()
     for origin in os.getenv(
         "CORS_ORIGINS",
-        "http://localhost:5173",
-        "http://localhost:5174",
-        "http://127.0.0.1:5173",
-        "http://127.0.0.1:5174",
+        "http://localhost:5173,http://localhost:5174,http://127.0.0.1:5173,http://127.0.0.1:5174",
     ).split(",")
     if origin.strip()
 ]
@@ -44,4 +41,4 @@ async def chat_endpoint(request: ChatRequest):
         reply = generate_chat_response(request.message)
         return {"response": reply}
     except Exception as exc:
-        return {"response": f"Something went wrong while generating the reply: {exc}"}
+        return {"response": f" Something went wrong while generating the reply: {exc}"}
