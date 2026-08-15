@@ -1,0 +1,56 @@
+# Python
+.venv/
+venv/
+env/
+ENV/
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+.pytest_cache/
+.mypy_cache/
+.pyre/
+
+
+
+# Environment files
+.env
+.env.*
+
+# Logs
+*.log
+logs/
+
+# Node / frontend
+node_modules/
+frontend/node_modules/
+frontend/dist/
+dist/
+build/
+.npm/
+.cache/
+*.tsbuildinfo
+backend/chatbot.py
+
+# IDE/editor
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# OS files
+*.swp
+*.swo
+
+# Local runtime data
+*.sqlite3
+*.db
+
+# Coverage / test output
+coverage/
+htmlcov/
+
+# Render / deployment extras
+.vercel/
+.netlify/
