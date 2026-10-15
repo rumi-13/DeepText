@@ -7,7 +7,7 @@ Deeptext is a simple AI chat application built with a FastAPI backend and a Reac
 This project combines:
 - Python backend with FastAPI
 - React + Vite frontend
-- AI model integration with Hugging Face / LangChain
+- AI model integration with Groq / LangChain
 - Local development workflow for testing before deployment
 
 ## Tech Stack
@@ -17,7 +17,7 @@ This project combines:
 - FastAPI
 - Pydantic
 - LangChain
-- Hugging Face model integration
+- Groq model integration (`qwen/qwen3.8-27b`)
 
 ### Frontend
 - React
@@ -31,15 +31,16 @@ MyChatApp/
 ├── .gitignore
 ├── README.md
 ├── backend/
-│   └── main.py
-├── chatbot.py
+│   ├── chatbot.py
+│   ├── main.py
+│   └── requirements.txt
 ├── frontend/
 │   ├── package.json
 │   ├── src/
 │   ├── public/
 │   ├── vite.config.js
 │   └── index.html
-└── .env
+└── .env (local only, never commit)
 ```
 
 ## Local Setup
@@ -55,7 +56,7 @@ source .venv/Scripts/activate
 ### 2. Install Python dependencies
 
 ```bash
-pip install -r ../requirements.txt
+pip install -r requirements.txt
 ```
 
 ### 3. Install frontend dependencies
@@ -89,12 +90,13 @@ http://localhost:5173
 
 ## Environment Variables
 
-Create a `.env` file at the project root with any required keys for your model or API access, for example:
+Create `backend/.env` locally with your Groq API key:
 
 ```env
-HF_TOKEN=your_token_here
-MODEL_NAME=your_model_name_here
+GROQ_API_KEY=your_groq_api_key_here
 ```
+
+Environment files are excluded by `.gitignore`. Never commit API keys or paste them into source files.
 
 ## Deployment on Render
 
@@ -136,7 +138,7 @@ uvicorn main:app --host 0.0.0.0 --port 10000
 ## Important Notes for Render
 
 - Add your environment variables in the Render dashboard.
-- If the model needs internet access or API keys, make sure those are configured in Render.
+- Add `GROQ_API_KEY` in the Render environment settings.
 - Use CORS settings that allow your frontend domain.
 - If the frontend talks to a separate backend, change the API URL in the React app to your live Render URL.
 

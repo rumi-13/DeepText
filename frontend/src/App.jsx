@@ -98,7 +98,7 @@ function App() {
           </div>
 
           <div className="rounded-full border border-black/15 bg-white px-3 py-1.5 text-[10px] font-medium uppercase tracking-wide text-black/70">
-            DeepSeek
+            Groq
           </div>
         </div>
       </header>
